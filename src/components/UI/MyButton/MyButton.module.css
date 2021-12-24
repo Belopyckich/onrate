@@ -1,0 +1,12 @@
+.myBtn {
+    padding: 10px;
+    color: teal;
+    border-radius: .5em;
+    cursor: pointer;
+}
+.myBtnError {
+    border: solid 2px red;
+}
+.myBtn:hover {
+    border: solid 2px teal;
+}

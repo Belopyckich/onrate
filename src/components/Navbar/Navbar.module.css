@@ -1,0 +1,21 @@
+.navbar {
+    font-size: 22px;
+    background-color: #171a21;
+    height: 90px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.header {
+    color:  #b8b6b4;
+    width: auto;
+    display: flex;
+    gap: 2vw;
+}
+.navlink {
+    color:  #b8b6b4;
+    list-style: none;
+    text-decoration: none;
+}

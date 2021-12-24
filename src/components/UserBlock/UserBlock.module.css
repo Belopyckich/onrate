@@ -1,0 +1,7 @@
+.user {
+    display: flex;
+}
+.userInfo {
+    display: flex;
+    flex-direction: column;
+}
