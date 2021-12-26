@@ -1,7 +1,7 @@
 import {api} from "../../api/api";
 
 const initialState = {
-    users: [],
+    users: {},
     friends: []
 }
 

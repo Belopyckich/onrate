@@ -1,0 +1,64 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    padding: 110px 0;
+    background-color: #526060;
+    align-items: center;
+}
+.container {
+    margin-top: 30px;
+    padding: 30px;
+    width: 90%;
+    background-color: #152638;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10rem;
+    border: solid 3px #c8d5e5;
+}
+.header {
+    text-align: center;
+    color: #c8d5e5;
+    font-size: 35px;
+}
+.info {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.properties, .photoAndButtons {
+    height: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.photoAndButtons {
+    align-items: center;
+}
+.buttons {
+    display: flex;
+    gap: 40px;
+}
+.property {
+    color: #c8d5e5;
+    font-size: 25px;
+}
+.photo {
+    height: 250px;
+    border-radius: 50%;
+}
+.modal {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #526060;
+    transition: 0.5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

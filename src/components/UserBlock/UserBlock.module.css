@@ -1,7 +1,28 @@
 .user {
+    background-color: #152638;
+    padding: 10px;
+    border: solid 3px #c8d5e5;
+    border-radius: 1rem;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+.name, .email {
+    color: #c8d5e5;
+    font-size: 20px;
+    font-weight: 500;
+}
+.userText, .userButtons {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+.userButtons {
+    color: #ffffff87;
 }
 .userInfo {
     display: flex;
-    flex-direction: column;
+    gap: 50px;
+    align-items: center;
 }
