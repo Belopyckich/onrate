@@ -1,9 +1,13 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getUsersThunk } from "../redux/reducer/userReducer";
+import { api } from "../api/api";
 
 export const AuthContext = createContext();
 
 const AuthContextComponent = ({children}) => {
-    const [user, setUser] = useState({
+    const dispatch = useDispatch();
+    const [myProfile, setMyProfile] = useState({
         gender: null,
         name: {first: null, last: null},
         dob: {date: null, age: null},
@@ -21,8 +25,15 @@ const AuthContextComponent = ({children}) => {
     });
     const [isAuth, setIsAuth] = useState(false);
 
+    useEffect(() => {
+        if (isAuth) {
+            api.getPhoto().then((photo) => (myProfile.picture.large = photo.url));
+            dispatch(getUsersThunk());
+        }
+    }, [isAuth])
+
     return (
-        <AuthContext.Provider value={{isAuth, setIsAuth, user, setUser}}>
+        <AuthContext.Provider value={{isAuth, setIsAuth, myProfile, setMyProfile}}>
             {children}
         </AuthContext.Provider>
     )

@@ -1,26 +1,22 @@
-.myInputDiv {
+.container {
     display: flex;
     flex-direction: column;
+    gap: 5px;
 }
 
-.error {
+.message {
     text-align: left;
-    color: red;
+    color: #de1b17;
     font-size: 15px;
 }
-.disabled {
-    display: none;
+
+.inputError {
+    border: 2px solid #de1b17;
 }
 
-.input {
+.input, .inputError {
     border-radius: .5em;
     padding: 10px 5px;
-    border: 2px solid teal;
-    color: teal;
-}
-.inputError {
-    border: 2px solid red;
-}
-.off {
-    display: none;
+    border: 2px solid #c8d5e5;
+    color: #212121;
 }

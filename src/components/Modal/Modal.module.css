@@ -1,3 +1,17 @@
+.modal {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #526060;
+    transition: 0.5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .form {
     display: flex;
     justify-content: space-between;

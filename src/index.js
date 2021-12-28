@@ -6,10 +6,10 @@ import {store} from "./redux/store";
 import './index.css';
 
 reactDOM.render(
-    <AuthContextComponent>
         <Provider store={store}>
-            <App/>
+            <AuthContextComponent>
+                <App/>
+            </AuthContextComponent>
         </Provider>
-    </AuthContextComponent>
     ,document.getElementById('root')
 );

@@ -1,10 +1,10 @@
 import React from 'react';
 import style from './MyButton.module.css';
 
-const MyButton = ({children, errorCheck, ...props}) => {
+const MyButton = ({children, isValid = true, ...props}) => {
 
     return (
-        <button {...props} className={errorCheck ? style.myBtnError + ' ' + style.myBtn : style.myBtn}>
+        <button {...props} className={isValid ? style.button : style.buttonError}>
             {children}
         </button>
     );

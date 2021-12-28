@@ -6,8 +6,8 @@ import Login from "../pages/Login/Login";
 import Films from "../pages/Films/Films";
 
 export const privateRoutes = [
-    {name: 'profile', component: Profile, path: '/onrate/:profile/info', exact: true},
-    {name: 'album', component: Album, path: '/onrate/:profile/album', exact: true},
+    {name: 'profile', component: Profile, path: '/onrate/:username/info', exact: true},
+    {name: 'album', component: Album, path: '/onrate/:username/album', exact: true},
     {name: 'users', component: Users, path: '/onrate/users', exact: true},
     {name: 'games', component: Games, path: '/onrate/games', exact: true},
     {name: 'films', component: Films, path: '/onrate/films', exact: true}

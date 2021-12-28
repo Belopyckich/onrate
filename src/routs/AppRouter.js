@@ -4,12 +4,11 @@ import {AuthContext} from "../context/AuthContextComponent"
 import {publicRoutes, privateRoutes} from "./routs";
 
 const AppRouter = () => {
-    const {isAuth, user} = useContext(AuthContext);
+    const {isAuth, myProfile} = useContext(AuthContext);
 
     useEffect(() => {
-        console.log(user);
-        localStorage.setItem('user', JSON.stringify(user));
-    }, [user])
+            localStorage.setItem('myProfile', JSON.stringify(myProfile));
+    }, [myProfile])
 
     return (
         isAuth ?

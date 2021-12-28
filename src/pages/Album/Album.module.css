@@ -1,0 +1,54 @@
+.album {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 110px 0;
+    background-color: #526060;
+    align-items: center;
+}
+.container {
+    margin-top: 30px;
+    padding: 30px;
+    gap: 5vh;
+    width: 90%;
+    min-height: 70vh;
+    background-color: #152638;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10rem;
+    border: solid 3px #c8d5e5;
+}
+.header {
+    text-align: center;
+    color: #c8d5e5;
+    font-size: 35px;
+}
+.photos {
+    margin: 50px auto;
+    gap: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.img {
+    border-radius: .5rem;
+}
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+.loop {
+    width: 256px;
+}
+.errorText {
+    color: #c8d5e5;
+    font-weight: 300;
+    font-size: 30px;
+}
