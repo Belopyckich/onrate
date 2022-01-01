@@ -6,6 +6,7 @@ const initialState = {
     friends: []
 }
 
+export const FETCH_USERS = "FETCH_USERS";
 export const ADD_USERS = "ADD_USERS";
 export const ADD_FRIEND = "ADD_FRIEND";
 export const REMOVE_FRIEND = "REMOVE_FRIEND";
@@ -26,8 +27,7 @@ const UserReducer = (state = initialState, action) => {
     }
 }
 
-export const getUsersThunk = () => (dispatch) => {
-    return api.getUsers().then(users => dispatch({type: ADD_USERS, payload: users}));
-}
+export const addUsers = payload => ({type: ADD_USERS, payload})
+export const fetchUsers = () => ({type: FETCH_USERS})
 
 export default UserReducer;

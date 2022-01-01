@@ -41,7 +41,7 @@ const Profile = () => {
                 <div className={style.manipulatePhotoButtons}>
                   <MyButton
                     onClick={async () => {
-                      await api.getPhoto().then(photo => 
+                      await api.fetchPhoto().then(photo => 
                         setMyProfile({
                           ...myProfile,
                           picture: { ...myProfile.picture, large: photo.url },
