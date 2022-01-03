@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from "../../components/Modal/Modal";
+import {ADD_INFO} from "../../redux/reducer/profileReducer";
   
   const fields = [
     { key: "gender", placeholder: "Enter gender" },
@@ -20,7 +21,7 @@ const ChangeInfoModal = ({setIsOpen}) => {
         header="Change Info"
         fields={fields}
         buttonName="Change"
-        setIsOpen={setIsOpen}
+        action={ADD_INFO}
       />
     );
 };

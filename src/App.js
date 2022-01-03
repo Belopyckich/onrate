@@ -1,11 +1,11 @@
-import React, {useContext} from 'react';
-import { AuthContext } from './context/AuthContextComponent';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from "./routs/AppRouter";
 import Navbar from './components/Navbar/Navbar';
+import { useSelector } from 'react-redux';
 
 const App = () => {
-    const {isAuth} = useContext(AuthContext)
+    const isAuth = useSelector(state => state.profile.isAuth);
+    
     return (
         <BrowserRouter>
             {isAuth && <Navbar/>}

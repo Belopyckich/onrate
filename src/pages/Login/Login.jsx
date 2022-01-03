@@ -1,6 +1,5 @@
-import { useContext } from "react";
 import Modal from "../../components/Modal/Modal";
-import { AuthContext } from "../../context/AuthContextComponent";
+import {SET_PROFILE} from "../../redux/reducer/profileReducer";
 
 const fields = [
   { key: "username", placeholder: "Введите имя пользователя" },
@@ -8,14 +7,13 @@ const fields = [
 ];
 
 const Login = () => {
-  const { setIsAuth } = useContext(AuthContext);
 
   return (
     <Modal
       header="Autorisation"
       fields={fields}
       buttonName="OPEN"
-      setIsOpen={setIsAuth}
+      action={SET_PROFILE}
     />
   );
 };

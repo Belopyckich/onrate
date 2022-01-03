@@ -1,40 +1,25 @@
 import MyValidInput from "../UI/MyInput/MyValidInput";
 import MyButton from "../UI/MyButton/MyButton";
 import style from "./Modal.module.css";
-import { useState, useContext } from "react";
-import { AuthContext } from "../../context/AuthContextComponent";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
-const Modal = ({ header, fields, buttonName, setIsOpen}) => {
-  const { myProfile, setMyProfile } = useContext(AuthContext);
-  const [isValid, setIsValid] = useState(true);
+const Modal = ({ header, fields, buttonName, action }) => {
+  const dispatch = useDispatch();
   const [state, setState] = useState({});
+  const [isValid, setIsValid] = useState(true);
 
   const onSubmit = (event) => {
     event.preventDefault();
-    if (Object.entries(state).find(input => input.isError === true && input.value === "")
-    ) {
-      setIsOpen(false);
+    if (Object.entries(state).find(input => input.isError === true && input.value === "")) {
       setIsValid(false);
     } else {
-      setIsValid(true);
-      setIsOpen(true);
-      setMyProfile({
-        ...myProfile,
-        gender: state.gender?.value,
-        login: {username: state.username?.value},
-        name: { first: state.firstname?.value, last: state.lastname?.value },
-        dob: { date: state.date?.value, age: state.age?.value },
-        date: state.date?.value,
-        email: state.email?.value,
-        location: {
-          city: state.city?.value,
-          state: state.state?.value,
-          country: state.country?.value,
-        },
-        phone: state.phone?.value,
-      });
+      setIsValid(true)
+      let data = {};
+      fields.forEach(element => data = {...data, [element.key]: state[element.key].value})
+      dispatch({type: action, payload: data});
     }
-  };
+  }
 
   return (
     <div className={style.modal}>

@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { AuthContext } from "../../context/AuthContextComponent";
 import { ADD_PHOTO, REMOVE_PHOTO } from "../../redux/reducer/photoReducer";
 import UserBlock from "../../components/UserBlock/UserBlock";
 import { useParams } from "react-router-dom";
@@ -12,16 +11,12 @@ import ChangeInfoModal from "./ChangeInfoModal";
 const Profile = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const { myProfile, setMyProfile } = useContext(AuthContext);
   const users = useSelector((state) => state.users.users);
   const friends = useSelector((state) => state.users.friends);
   const photos = useSelector((state) => state.photos.photos);
+  const myProfile = useSelector(state => state.profile);
   const { username } = useParams();
-  const profile = users.find((user) => user.login.username === username) || myProfile;
-
-  useEffect(() => {
-    console.log(photos);
-  }, [photos])
+  const profile = users.find(user => user.login.username === username) || myProfile;
 
   return isOpen ? (
     <ChangeInfoModal setIsOpen={setIsOpen} />
@@ -40,14 +35,14 @@ const Profile = () => {
               <div className={style.buttons}>
                 <div className={style.manipulatePhotoButtons}>
                   <MyButton
-                    onClick={async () => {
-                      await api.fetchPhoto().then(photo => 
-                        setMyProfile({
-                          ...myProfile,
-                          picture: { ...myProfile.picture, large: photo.url },
-                        })
-                      )
-                    }}
+                    // onClick={async () => {
+                    //   await api.fetchPhoto().then(photo => 
+                    //     setMyProfile({
+                    //       ...myProfile,
+                    //       picture: { ...myProfile.picture, large: photo.url },
+                    //     })
+                    //   )
+                    // }}
                   >
                     CHANGE PHOTO
                   </MyButton>
