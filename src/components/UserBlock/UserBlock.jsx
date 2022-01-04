@@ -1,12 +1,12 @@
 import React from 'react';
 import style from "./UserBlock.module.css";
 import { useDispatch, useSelector } from 'react-redux';
-import {ADD_FRIEND, REMOVE_FRIEND} from "../../redux/reducer/userReducer";
+import {ADD_FRIEND, REMOVE_FRIEND} from "../../redux/reducer/profileReducer";
 import MyButton from "../UI/MyButton/MyButton";
 import { useHistory } from 'react-router-dom';
 
 const UserBlock = ({user, ...props}) => {
-    const friends = useSelector(state => state.users.friends);
+    const friends = useSelector(state => state.profile.friends);
     const history = useHistory(); 
     const dispatch = useDispatch();
 
@@ -21,9 +21,9 @@ const UserBlock = ({user, ...props}) => {
             </div>
             <div className={style.userButtons}>
                 {friends.includes(user) ?
-                    <MyButton onClick={() => dispatch({type: REMOVE_FRIEND, payload: user})}>REMOVE FRIEND</MyButton>
-                    :
-                    <MyButton onClick={() => dispatch({type: ADD_FRIEND, payload: user})}>ADD FRIEND</MyButton>
+                        <MyButton onClick={() => dispatch({type: REMOVE_FRIEND, payload: user})}>REMOVE FRIEND</MyButton>
+                        :
+                        <MyButton onClick={() => dispatch({type: ADD_FRIEND, payload: user})}>ADD FRIEND</MyButton>
                 }
                 <MyButton onClick={() => history.push(`/onrate/${user.login.username}/info`)}>OPEN PROFILE</MyButton>
             </div>

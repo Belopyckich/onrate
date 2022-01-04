@@ -1,6 +1,5 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
-import userReducer from "./reducer/userReducer";
-import photoReducer from "./reducer/photoReducer";
+import usersReducer from "./reducer/usersReducer";
 import profileReducer from "./reducer/profileReducer";
 import createSagaMiddleware from "@redux-saga/core";
 import { rootWatcher } from "./saga";
@@ -9,8 +8,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 
 const rootReducer = combineReducers({
-    users: userReducer,
-    photos: photoReducer,
+    users: usersReducer,
     profile: profileReducer,
 })
 

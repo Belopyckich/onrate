@@ -1,13 +1,13 @@
 import React from "react";
 import style from "./Album.module.css";
-import { REMOVE_PHOTO } from "../../redux/reducer/photoReducer";
 import { useSelector, useDispatch } from "react-redux";
 import MyButton from "../../components/UI/MyButton/MyButton";
 import loop from "../../image/loop.svg";
+import { REMOVE_PHOTO_FROM_ALBUM } from "../../redux/reducer/profileReducer";
 
 const Album = () => {
   const dispatch = useDispatch();
-  const album = useSelector((state) => state.photos.photos);
+  const album = useSelector((state) => state.profile.album);
 
   return (
     <div className={style.album}>
@@ -20,7 +20,7 @@ const Album = () => {
                 <img src={photo} className={style.img} alt={`${index}`} />
                 <MyButton
                   onClick={() =>
-                    dispatch({ type: REMOVE_PHOTO, payload: photo })
+                    dispatch({ type: REMOVE_PHOTO_FROM_ALBUM, payload: photo })
                   }
                 >
                   Delete photo

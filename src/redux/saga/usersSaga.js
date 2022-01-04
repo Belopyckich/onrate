@@ -1,16 +1,13 @@
 import {put, takeEvery, call} from "redux-saga/effects";
 import {api} from "../../api/api";
-import {addUsers, FETCH_USERS} from "../reducer/userReducer";
+import {addUsers, FETCH_USERS} from "../reducer/usersReducer";
+import {SET_PROFILE} from "../reducer/profileReducer";
 function* fetchUserWorker() {
-    const data = yield call(api.fetchUsers);
-    yield put(addUsers(data))
+    const users = yield call(api.fetchUsers);
+    console.log(users);
+    yield put(addUsers(users))
 }
-
-function* removeUserWorker() {
-
-}
-
 
 export function * usersWatcher() {
-    yield takeEvery(FETCH_USERS, fetchUserWorker)
+    yield takeEvery(SET_PROFILE, fetchUserWorker)
 }

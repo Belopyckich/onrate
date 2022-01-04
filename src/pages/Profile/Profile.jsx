@@ -1,26 +1,25 @@
-import React, { useContext, useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ADD_PHOTO, REMOVE_PHOTO } from "../../redux/reducer/photoReducer";
 import UserBlock from "../../components/UserBlock/UserBlock";
 import { useParams } from "react-router-dom";
 import style from "./Profile.module.css";
 import MyButton from "../../components/UI/MyButton/MyButton";
-import { api } from "../../api/api";
-import ChangeInfoModal from "./ChangeInfoModal";
+import {
+  ADD_PHOTO_IN_ALBUM,
+  REMOVE_PHOTO_FROM_ALBUM,
+  FETCH_PROFILE_PHOTO,
+} from "../../redux/reducer/profileReducer";
+import { useHistory } from "react-router-dom";
 
 const Profile = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
-  const [isOpen, setIsOpen] = useState(false);
   const users = useSelector((state) => state.users.users);
-  const friends = useSelector((state) => state.users.friends);
-  const photos = useSelector((state) => state.photos.photos);
-  const myProfile = useSelector(state => state.profile);
+  const profile = useSelector((state) => state.profile);
   const { username } = useParams();
-  const profile = users.find(user => user.login.username === username) || myProfile;
+  const currentProfile = users.find(user => user.login.username === username) || profile;
 
-  return isOpen ? (
-    <ChangeInfoModal setIsOpen={setIsOpen} />
-  ) : (
+  return (
     <div className={style.profile}>
       <div className={style.container}>
         <div className={style.header}>PROFILE</div>
@@ -28,77 +27,68 @@ const Profile = () => {
           <div className={style.photoAndButtons}>
             <img
               className={style.photo}
-              src={profile.picture?.large}
-              alt={`${profile.login?.username}__picture`}
+              src={currentProfile.picture?.large}
+              alt={`${currentProfile.login?.username}__picture`}
             />
-            {profile === myProfile && (
+            {currentProfile === profile && (
               <div className={style.buttons}>
                 <div className={style.manipulatePhotoButtons}>
                   <MyButton
-                    // onClick={async () => {
-                    //   await api.fetchPhoto().then(photo => 
-                    //     setMyProfile({
-                    //       ...myProfile,
-                    //       picture: { ...myProfile.picture, large: photo.url },
-                    //     })
-                    //   )
-                    // }}
+                    onClick={() => dispatch({ type: FETCH_PROFILE_PHOTO })}
                   >
                     CHANGE PHOTO
                   </MyButton>
-                  <MyButton onClick={() => setIsOpen(!isOpen)}>
+                  <MyButton onClick={() => history.push('/onrate/changeInfo')}>
                     CHANGE INFO
                   </MyButton>
                 </div>
-                {photos.includes(myProfile.picture.large) ?
-                  <MyButton onClick={() => dispatch({type: REMOVE_PHOTO, payload: myProfile.picture.large})}>REMOVE PHOTO FROM GALLERY</MyButton> 
-                  :
-                  <MyButton onClick={() => dispatch({type: ADD_PHOTO, payload: myProfile.picture.large})}>ADD PHOTO TO GALLERY</MyButton> 
-                }
+                {profile.album.includes(profile.picture.large) ? (
+                  <MyButton
+                    onClick={() =>
+                      dispatch({
+                        type: REMOVE_PHOTO_FROM_ALBUM,
+                        payload: profile.picture.large,
+                      })
+                    }
+                  >
+                    REMOVE PHOTO FROM GALLERY
+                  </MyButton>
+                ) : (
+                  <MyButton
+                    onClick={() =>
+                      dispatch({
+                        type: ADD_PHOTO_IN_ALBUM,
+                        payload: profile.picture.large,
+                      })
+                    }
+                  >
+                    ADD PHOTO TO GALLERY
+                  </MyButton>
+                )}
               </div>
             )}
           </div>
           <div className={style.properties}>
+            <div className={style.property}>gender: {currentProfile?.gender}</div>
+            <div className={style.property}>username: {currentProfile.login?.username}</div>
+            <div className={style.property}>name: {currentProfile.name?.first || currentProfile.name?.last}</div>
             <div className={style.property}>
-              gender: {profile?.gender ? profile.gender : "null"}
+              date: {currentProfile.dob?.date && ""}
+              age: {currentProfile.dob?.age && ""}
             </div>
-            <div className={style.property}>
-              username:{" "}
-              {profile.login?.username
-                ? profile.login.username
-                : "null"}
-            </div>
-            <div className={style.property}>
-              name:{" "}
-              {profile.name?.first && profile.name.last
-                ? `${profile.name.first} ${profile.name.last}`
-                : "null"}
-            </div>
-            <div className={style.property}>
-              date: {profile.dob?.date ? profile.dob.date : "null"},
-              age: {profile.dob?.age ? profile.dob.age : "null"},
-            </div>
-            <div className={style.property}>
-              email: {profile?.email ? profile.email : "null"}
-            </div>
-            <div className={style.property}>
-              phone: {profile?.phone ? profile.phone : "null"}
-            </div>
-            <div className={style.property}>
-              registred{" "}
-              {profile.registred?.date
-                ? profile.registred.date
-                : "null"}
-            </div>
+            <div className={style.property}>email: {currentProfile?.email}</div>
+            <div className={style.property}>phone: {currentProfile?.phone}</div>
+            <div className={style.property}>registered: {currentProfile.registered?.date}</div>
           </div>
         </div>
       </div>
       <div className={style.container}>
         <div className={style.header}>FRIENDS</div>
         <div className={style.info}>
-          {friends.map((friend, index) => (
-            <UserBlock user={friend} key={index} />
-          ))}
+            {currentProfile.friends.map((friend, index) => (
+              <UserBlock user={friend} key={index}/>
+            ))
+          }
         </div>
       </div>
       <div className={style.container}>

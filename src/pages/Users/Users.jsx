@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import UserBlock from "../../components/UserBlock/UserBlock";
 import style from "./Users.module.css";
