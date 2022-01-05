@@ -1,10 +1,9 @@
 import {put, takeEvery, call} from "redux-saga/effects";
-import {api} from "../../api/api";
-import {addUsers, FETCH_USERS} from "../reducer/usersReducer";
+import {randomuserApi} from "../../api/api";
+import { addUsers } from "../reducer/usersReducer";
 import {SET_PROFILE} from "../reducer/profileReducer";
 function* fetchUserWorker() {
-    const users = yield call(api.fetchUsers);
-    console.log(users);
+    const users = yield call(randomuserApi.fetchUsers);
     yield put(addUsers(users))
 }
 

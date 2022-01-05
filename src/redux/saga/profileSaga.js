@@ -1,9 +1,9 @@
 import { FETCH_PROFILE_PHOTO, SET_PROFILE, setProfilePhoto } from "../reducer/profileReducer";
-import {api} from "../../api/api";
+import {randomuserApi} from "../../api/api";
 import {call, put, takeEvery} from "redux-saga/effects";
 
 function* fetchProfilePhotoWorker() {
-    const data = yield call(api.fetchPhoto);
+    const data = yield call(randomuserApi.fetchPhoto);
     yield put(setProfilePhoto(data));
 }
 

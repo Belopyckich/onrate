@@ -15,6 +15,7 @@ const initialState = {
     isAuth: false,
     album: [],
     friends: [],
+    games: [],
 }
 
 export const FETCH_PROFILE_PHOTO = "FETCH_PHOTO";

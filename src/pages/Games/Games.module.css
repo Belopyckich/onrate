@@ -1,0 +1,9 @@
+.main {
+    padding: 110px 0;
+    background-color: #526060;
+}
+.users {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}

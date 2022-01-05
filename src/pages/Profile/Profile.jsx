@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import UserBlock from "../../components/UserBlock/UserBlock";
 import { useParams } from "react-router-dom";
 import style from "./Profile.module.css";
 import MyButton from "../../components/UI/MyButton/MyButton";
+import { rawgApi } from "../../api/api";
 import {
   ADD_PHOTO_IN_ALBUM,
   REMOVE_PHOTO_FROM_ALBUM,
@@ -18,6 +18,9 @@ const Profile = () => {
   const profile = useSelector((state) => state.profile);
   const { username } = useParams();
   const currentProfile = users.find(user => user.login.username === username) || profile;
+  const isMyProfile = username === profile.login.username;
+
+  rawgApi.fetchGamesByPage().then(data => console.log(data));
 
   return (
     <div className={style.profile}>
@@ -30,7 +33,7 @@ const Profile = () => {
               src={currentProfile.picture?.large}
               alt={`${currentProfile.login?.username}__picture`}
             />
-            {currentProfile === profile && (
+            {isMyProfile && (
               <div className={style.buttons}>
                 <div className={style.manipulatePhotoButtons}>
                   <MyButton
@@ -86,7 +89,7 @@ const Profile = () => {
         <div className={style.header}>FRIENDS</div>
         <div className={style.info}>
             {currentProfile.friends.map((friend, index) => (
-              <UserBlock user={friend} key={index}/>
+              <UserBlock user={friend} key={index} isCha/>
             ))
           }
         </div>
