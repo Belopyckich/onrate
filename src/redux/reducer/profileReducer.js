@@ -26,6 +26,8 @@ export const ADD_FRIEND = "ADD_FRIEND";
 export const REMOVE_FRIEND = "REMOVE_FRIEND";
 export const ADD_PHOTO_IN_ALBUM = "ADD_PHOTO_IN_ALBUM";
 export const REMOVE_PHOTO_FROM_ALBUM = "REMOVE_PHOTO_FROM_ALBUM";
+export const ADD_GAME = "ADD_GAME";
+export const REMOVE_GAME = "REMOVE_GAME";
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -56,6 +58,10 @@ const profileReducer = (state = initialState, action) => {
             return { ...state, album: [...state.album, action.payload] }
         case REMOVE_PHOTO_FROM_ALBUM:
             return { ...state, album: state.album.filter(photo => photo !== action.payload) };
+        case ADD_GAME:
+            return {...state, games: [...state.games, action.payload]}
+        case REMOVE_GAME:
+            return {...state, games: state.games.filter(game => game !== action.payload)}
         default:
             return state;
     }

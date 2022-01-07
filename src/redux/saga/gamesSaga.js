@@ -5,7 +5,6 @@ import { SET_PROFILE } from "../reducer/profileReducer";
 
 function* fetchGamesWorker() {
     const games = yield call(rawgApi.fetchGamesByPage)
-    console.log(games);
     yield put(setGames(games))
 }
 

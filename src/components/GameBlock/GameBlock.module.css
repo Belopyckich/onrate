@@ -1,17 +1,18 @@
 .game {
     display: flex;
 }
-.container {
+.container, .containerOnFocus {
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
     padding: 0px 0px 58% 0px;
-    margin: 20px;
-    width: 325px;
-    overflow: hidden;
+    margin: 40px;
+    width: 360px;
     position: relative;
     display: flex;
     justify-content: center;
 }
 .imageOnFocus {
-    opacity: .2;
+    opacity: .1;
 }
 .image, .imageOnFocus {
     border-radius: 20px;
@@ -23,34 +24,55 @@
     left: 0;
 }
 .likesContainer {
+    cursor: pointer;
     background-color: rgba(0, 0, 0, 0.7);
     border: 2px solid #c8d5e5;
     padding: 8px;
-    border-radius: 20px;
+    border-radius:  0 20px 0 20px;
     display: flex;
+    align-items: center;
     gap: 5px;
-    color: #c8d5e5;
     position: absolute;
-    bottom: 10%;
-    left: 10%;
+    bottom: 0%;
+    left: 0%;
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
     user-select: none;
 }
+.likeIcon {
+    width: 25px;
+}
+.likes {
+    color: #c8d5e5;
+    font-size: 20px;
+    font-weight: 100;
+}
 .platforms {
+    border: 2px solid #c8d5e5;
     position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 0px 20px 20px 0;
+    width: 70px;
+    right: 0;
+    height: 100%;
+    align-items: center;
 }
 .platform {
     width: 20px;
 }
 .title {
+    padding: 0 100px;
     position: absolute;
     text-align: center;
     top: 35%;
     color: #c8d5e5;
     font-size: 25px;
-    font-weight: 500;
+    font-weight: 100;
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;

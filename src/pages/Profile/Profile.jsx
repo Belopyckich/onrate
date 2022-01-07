@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import UserBlock from "../../components/UserBlock/UserBlock";
+import GameBlock from "../../components/GameBlock/GameBlock";
 import { useParams } from "react-router-dom";
 import style from "./Profile.module.css";
 import MyButton from "../../components/UI/MyButton/MyButton";
@@ -89,14 +90,19 @@ const Profile = () => {
         <div className={style.header}>FRIENDS</div>
         <div className={style.info}>
             {currentProfile.friends.map((friend, index) => (
-              <UserBlock user={friend} key={index} isCha/>
+              <UserBlock user={friend} key={index}/>
             ))
           }
         </div>
       </div>
       <div className={style.container}>
         <div className={style.header}>GAMES</div>
-        <div className={style.info}></div>
+        <div className={style.info}>
+            {currentProfile.games.map(game => (
+              <GameBlock game={game} key={game.id}/>
+            ))
+          }
+        </div>
       </div>
       <div className={style.container}>
         <div className={style.header}>FILMS</div>

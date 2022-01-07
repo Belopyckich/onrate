@@ -1,50 +1,42 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import style from "./GameBlock.module.css";
 import { useDispatch, useSelector } from 'react-redux';
-import {ADD_FRIEND, REMOVE_FRIEND} from "../../redux/reducer/profileReducer";
+import plus from "../../image/plus.svg";
+import minus from "../../image/minus.svg";
+import platformIcons from "../../image/platforms/platformIcons";
+import { ADD_GAME, REMOVE_GAME } from "../../redux/reducer/profileReducer";
 import MyButton from "../UI/MyButton/MyButton";
 import { useHistory } from 'react-router-dom';
 
-const GameBlock = ({game, ...props}) => {
+const GameBlock = ({ game, ...props }) => {
     const dispatch = useDispatch();
     const [onFocus, setOnFocus] = useState(false);
     const profileGames = useSelector(state => state.profile.games);
-    const history = useHistory(); 
+    const history = useHistory();
+    const isLiked = profileGames.includes(game);
+
+    const onClick = (e) => {
+        e.stopPropagation();
+        isLiked ? dispatch({ type: REMOVE_GAME, payload: game }) : dispatch({ type: ADD_GAME, payload: game })
+    }
 
     return (
         <div className={style.game} {...props}>
-            <div className={style.container} {...props} onMouseEnter={() => setOnFocus(true)} onMouseLeave={() => setOnFocus(false)}>
-                <img className={onFocus ?  style.imageOnFocus : style.image} src={game.background_image} alt={game.background_image}/>
-                <div className={style.likesContainer}>
-                    <div>+</div>
-                    <div className={style.likes}>{game.added}</div>
+            <div className={style.container} {...props} onMouseEnter={() => setOnFocus(true)} onMouseLeave={() => setOnFocus(false)} onClick={() => history.push(`/onrate/games/${game.slug}`)}>
+                <img className={onFocus ? style.imageOnFocus : style.image} src={game.background_image} alt={game.background_image} />
+                <div className={style.likesContainer} onClick={onClick}>
+                    <img className={style.likeIcon} src={isLiked ? minus : plus} alt={isLiked ? "minus" : "plus"} />
+                    <div className={style.likes}>{isLiked ? game.added + 1 : game.added}</div>
                 </div>
                 {onFocus &&
-                    <div className={style.title}>{game.name}</div>
+                    <div className={style.platforms}>
+                        {game.parent_platforms.map(platform =>
+                            <img className={style.platform} src={platformIcons[platform.platform.slug]} key={platform.platform.id} />
+                        )}
+                    </div>
                 }
-                {/* <div className={style.platforms}>
-                    {game.platforms.map(platform =>
-                            <img className={style.platformIcon} key={platform.platform.name} src={platform.platform.image_background} alt={platform.platform.name}/>
-                    )}
-                </div> */}
-                {/* <div className={style.userText}>
-                    <div className={style.name}>{game.name}</div>
-                    <div className={style.email}>{game.added}</div>
-                    {game['parent_platforms'].map(platform =>
-                        <div key={platform.name}>{platform.name}</div>
-                    )}
-                    <div>{game.rating}</div>
-                    <div className={style.email}>{game.rating}</div>
-                </div> */}
+                {onFocus && <div className={style.title}>{game.name}</div>}
             </div>
-            {/* <div className={style.userButtons}>
-                {profileGames.includes(game) ?
-                        <MyButton onClick={() => dispatch({type: REMOVE_FRIEND, payload: game})}>REMOVE FRIEND</MyButton>
-                        :
-                        <MyButton onClick={() => dispatch({type: ADD_FRIEND, payload: game})}>ADD FRIEND</MyButton>
-                }
-                <MyButton onClick={() => history.push(`/onrate/info`)}>OPEN PROFILE</MyButton>
-            </div> */}
         </div>
     );
 };
