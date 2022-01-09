@@ -28,13 +28,11 @@ const GameBlock = ({ game, ...props }) => {
                     <img className={style.likeIcon} src={isLiked ? minus : plus} alt={isLiked ? "minus" : "plus"} />
                     <div className={style.likes}>{isLiked ? game.added + 1 : game.added}</div>
                 </div>
-                {onFocus &&
-                    <div className={style.platforms}>
-                        {game.parent_platforms.map(platform =>
-                            <img className={style.platform} src={platformIcons[platform.platform.slug]} key={platform.platform.id} />
-                        )}
-                    </div>
-                }
+                <div className={onFocus ? style.platformsOnFocus : style.platforms}>
+                    {game.parent_platforms.map(platform =>
+                        <img className={style.platform} src={platformIcons[platform.platform.slug]} key={platform.platform.id} alt={platform.platform.name} />
+                    )}
+                </div>
                 {onFocus && <div className={style.title}>{game.name}</div>}
             </div>
         </div>

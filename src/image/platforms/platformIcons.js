@@ -6,6 +6,7 @@ import ios from "./ios.svg";
 import linux from "./linux.svg";
 import android from "./android.svg";
 import mac from "./mac.svg";
+import web from "./web.svg";
 
 
 const platformIcons = {
@@ -16,7 +17,8 @@ const platformIcons = {
     ios: ios,
     mac: mac,
     android: android,
-    linux: linux
+    linux: linux,
+    web: web
 }
 
 export default platformIcons;
