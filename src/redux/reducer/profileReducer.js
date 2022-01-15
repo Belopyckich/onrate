@@ -1,8 +1,8 @@
 const initialState = {
     gender: null,
-    name: { first: null, last: null },
-    dob: { date: null, age: null },
-    login: { username: null, password: null },
+    name: null,
+    dob: null,
+    login: null,
     email: null,
     location: {
         city: null,
@@ -10,8 +10,8 @@ const initialState = {
         country: null
     },
     phone: null,
-    picture: { large: null },
-    registered: { date: null },
+    picture: null,
+    registered: null,
     isAuth: false,
     album: [],
     friends: [],
@@ -39,11 +39,12 @@ const profileReducer = (state = initialState, action) => {
             };
         
         case ADD_INFO:
+            console.log(action.payload.date)
             return {
                 ...state,
                 gender: action.payload.gender,
                 name: {...state.name, first: action.payload.firstname, last: action.payload.lastname},
-                dob: {...state.dob, date: action.payload.date.toISOString().slice(0,10), age: action.payload.age},
+                dob: {...state.dob, date: action.payload.date, age: action.payload.age},
                 email: action.payload.email,
                 location: {...state.location, city: action.payload.city, state: action.payload.state, country: action.payload.country},
                 phone: action.payload.phone,

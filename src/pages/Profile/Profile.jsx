@@ -4,7 +4,6 @@ import GameBlock from "../../components/GameBlock/GameBlock";
 import { useParams } from "react-router-dom";
 import style from "./Profile.module.css";
 import MyButton from "../../components/UI/MyButton/MyButton";
-import { rawgApi } from "../../api/api";
 import {
   ADD_PHOTO_IN_ALBUM,
   REMOVE_PHOTO_FROM_ALBUM,
@@ -18,10 +17,35 @@ const Profile = () => {
   const users = useSelector((state) => state.users.users);
   const profile = useSelector((state) => state.profile);
   const { username } = useParams();
-  const currentProfile = users.find(user => user.login.username === username) || profile;
+  const currentProfile =
+    users.find((user) => user.login.username === username) || profile;
   const isMyProfile = username === profile.login.username;
 
-  rawgApi.fetchGamesByPage().then(data => console.log(data));
+  const checkProfilePicture = (profile) => {
+    return profile.album.includes(profile.picture.large) ? (
+      <MyButton
+        onClick={() =>
+          dispatch({
+            type: REMOVE_PHOTO_FROM_ALBUM,
+            payload: profile.picture.large,
+          })
+        }
+      >
+        REMOVE PHOTO FROM GALLERY
+      </MyButton>
+    ) : (
+      <MyButton
+        onClick={() =>
+          dispatch({
+            type: ADD_PHOTO_IN_ALBUM,
+            payload: profile.picture.large,
+          })
+        }
+      >
+        ADD PHOTO TO GALLERY
+      </MyButton>
+    );
+  };
 
   return (
     <div className={style.profile}>
@@ -42,66 +66,50 @@ const Profile = () => {
                   >
                     CHANGE PHOTO
                   </MyButton>
-                  <MyButton onClick={() => history.push('/onrate/changeInfo')}>
+                  <MyButton onClick={() => history.push("/onrate/changeInfo")}>
                     CHANGE INFO
                   </MyButton>
                 </div>
-                {profile.album.includes(profile.picture.large) ? (
-                  <MyButton
-                    onClick={() =>
-                      dispatch({
-                        type: REMOVE_PHOTO_FROM_ALBUM,
-                        payload: profile.picture.large,
-                      })
-                    }
-                  >
-                    REMOVE PHOTO FROM GALLERY
-                  </MyButton>
-                ) : (
-                  <MyButton
-                    onClick={() =>
-                      dispatch({
-                        type: ADD_PHOTO_IN_ALBUM,
-                        payload: profile.picture.large,
-                      })
-                    }
-                  >
-                    ADD PHOTO TO GALLERY
-                  </MyButton>
-                )}
+                {checkProfilePicture(profile)}
               </div>
             )}
           </div>
           <div className={style.properties}>
-            <div className={style.property}>gender: {currentProfile?.gender}</div>
-            <div className={style.property}>username: {currentProfile.login?.username}</div>
-            <div className={style.property}>name: {currentProfile.name?.first || currentProfile.name?.last}</div>
+            <div className={style.property}>
+              gender: {currentProfile?.gender}
+            </div>
+            <div className={style.property}>
+              username: {currentProfile.login?.username}
+            </div>
+            <div className={style.property}>
+              name: {currentProfile.name?.first || currentProfile.name?.last}
+            </div>
             <div className={style.property}>
               date: {currentProfile.dob?.date && ""}
               age: {currentProfile.dob?.age && ""}
             </div>
             <div className={style.property}>email: {currentProfile?.email}</div>
             <div className={style.property}>phone: {currentProfile?.phone}</div>
-            <div className={style.property}>registered: {currentProfile.registered?.date}</div>
+            <div className={style.property}>
+              registered: {currentProfile.registered?.date}
+            </div>
           </div>
         </div>
       </div>
       <div className={style.container}>
         <div className={style.header}>FRIENDS</div>
         <div className={style.info}>
-            {currentProfile.friends.map((friend, index) => (
-              <UserBlock user={friend} key={index}/>
-            ))
-          }
+          {currentProfile.friends.map((friend, index) => (
+            <UserBlock user={friend} key={index} />
+          ))}
         </div>
       </div>
       <div className={style.container}>
         <div className={style.header}>GAMES</div>
         <div className={style.info}>
-            {currentProfile.games.map(game => (
-              <GameBlock game={game} key={game.id}/>
-            ))
-          }
+          {currentProfile.games.map((game) => (
+            <GameBlock game={game} key={game.id} />
+          ))}
         </div>
       </div>
       <div className={style.container}>
